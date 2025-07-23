@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<string.h>
+
+struct students{
+    char name[100];
+    float marks;
+};
+
+int main(){
+    int num;
+    printf("How many Students ?(LIMIT 100) :");
+    scanf("%d",&num);
+    struct students s[num];
+    getchar();
+    for(int i=0;i<num;i++){
+   
+    printf("Enter the Name of student %d :",i+1);
+    fgets(s[i].name,sizeof(s[i].name),stdin);
+    s[i].name[strcspn(s[i].name,"\n")]='\0';
+
+    printf("Enter the Student %d Marks:",i+1);
+    scanf("%f",&s[i].marks);
+    getchar();
+
+
+
+    }
+    printf("------------STUDENT RESULTS-----------------\n");
+    for(int i=0;i<num;i++)
+    {
+        printf("%d. %s -%.2f\n",i+1,s[i].name,s[i].marks);
+    }
+    float total=0;
+     for(int i=0;i<num;i++){
+        total+=s[i].marks;
+     }
+     printf("Total Marks :%.2f\n",total);
+     printf("Average Marks :%.2f\n",total/(float)num);
+     
+     float max=s[0].marks;
+     char maxName[100];
+     float min=s[0].marks;
+     char minName[100]=s[0].name;
+
+    for(int i=0;i<num;i++)
+    {
+        if(s[i].marks>max){
+            max=s[i].marks;
+            strcpy(maxName,s[i].name);
+        }
+
+        if(s[i].marks<min)
+        {
+            min=s[i].marks;
+            strcpy(minName,s[i].name);
+        }
+    }
+
+    printf("Highest Scorer : %s (%.2f)\n",maxName,max);
+    printf("Lowest Scorer : %s (%.2f)\n",minName,min);
+    return 0;
+}
